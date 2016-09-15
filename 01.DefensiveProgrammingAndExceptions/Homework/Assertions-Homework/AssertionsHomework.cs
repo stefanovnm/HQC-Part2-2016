@@ -1,12 +1,29 @@
 ﻿using System;
-using System.Linq;
 using System.Diagnostics;
+using System.Linq;
 
-class AssertionsHomework
+internal class AssertionsHomework
 {
+    public static void Main()
+    {
+        int[] arr = new int[] { 3, -1, 15, 4, 17, 2, 33, 0 };
+        Console.WriteLine("arr = [{0}]", string.Join(", ", arr));
+        SelectionSort(arr);
+        Console.WriteLine("sorted = [{0}]", string.Join(", ", arr));
+
+        SelectionSort(new int[0]); // Test sorting empty array
+        SelectionSort(new int[1]); // Test sorting single element array
+
+        Console.WriteLine(BinarySearch(arr, -1000));
+        Console.WriteLine(BinarySearch(arr, 0));
+        Console.WriteLine(BinarySearch(arr, 17));
+        Console.WriteLine(BinarySearch(arr, 10));
+        Console.WriteLine(BinarySearch(arr, 1000));
+    }
+
     public static void SelectionSort<T>(T[] arr) where T : IComparable<T>
     {
-        for (int index = 0; index < arr.Length-1; index++)
+        for (int index = 0; index < arr.Length - 1; index++)
         {
             int minElementIndex = FindMinElementIndex(arr, index, arr.Length - 1);
             Swap(ref arr[index], ref arr[minElementIndex]);
@@ -24,6 +41,7 @@ class AssertionsHomework
                 minElementIndex = i;
             }
         }
+
         return minElementIndex;
     }
 
@@ -34,7 +52,7 @@ class AssertionsHomework
         y = oldX;
     }
 
-    public static int BinarySearch<T>(T[] arr, T value) where T : IComparable<T>
+    private static int BinarySearch<T>(T[] arr, T value) where T : IComparable<T>
     {
         return BinarySearch(arr, value, 0, arr.Length - 1);
     }
@@ -49,6 +67,7 @@ class AssertionsHomework
             {
                 return midIndex;
             }
+
             if (arr[midIndex].CompareTo(value) < 0)
             {
                 // Search on the right half
@@ -63,22 +82,5 @@ class AssertionsHomework
 
         // Searched value not found
         return -1;
-    }
-
-    static void Main()
-    {
-        int[] arr = new int[] { 3, -1, 15, 4, 17, 2, 33, 0 };
-        Console.WriteLine("arr = [{0}]", string.Join(", ", arr));
-        SelectionSort(arr);
-        Console.WriteLine("sorted = [{0}]", string.Join(", ", arr));
-
-        SelectionSort(new int[0]); // Test sorting empty array
-        SelectionSort(new int[1]); // Test sorting single element array
-
-        Console.WriteLine(BinarySearch(arr, -1000));
-        Console.WriteLine(BinarySearch(arr, 0));
-        Console.WriteLine(BinarySearch(arr, 17));
-        Console.WriteLine(BinarySearch(arr, 10));
-        Console.WriteLine(BinarySearch(arr, 1000));
     }
 }
