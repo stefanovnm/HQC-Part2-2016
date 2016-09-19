@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace AssertionsHomework
 {
@@ -11,6 +12,8 @@ namespace AssertionsHomework
                 int minElementIndex = FindMinElementIndex(arr, index, arr.Length - 1);
                 Swap(ref arr[index], ref arr[minElementIndex]);
             }
+
+            Debug.Assert(Utils.IsArraySorted(arr), "Array is not sorted");
         }
 
         private static int FindMinElementIndex<T>(T[] arr, int startIndex, int endIndex)
@@ -25,6 +28,7 @@ namespace AssertionsHomework
                 }
             }
 
+            Debug.Assert(Utils.IsMinValue(arr, arr[minElementIndex], startIndex, endIndex), "Returns not the minimum element!");
             return minElementIndex;
         }
 

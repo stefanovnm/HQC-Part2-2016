@@ -18,7 +18,7 @@ namespace AssertionsHomework
             Debug.Assert(startIndex >= 0 && startIndex < arr.Length, "Start index is out of range!");
             Debug.Assert(endIndex >= 0 && endIndex < arr.Length, "End index is out of range!");
             Debug.Assert(startIndex < endIndex, "End index is smaller than the start index!");
-            Debug.Assert(!Utils.IsArraySorted(arr), "Array must be sorted for Binary Search!");
+            Debug.Assert(Utils.IsArraySorted(arr), "Array must be sorted for Binary Search!");
 
             while (startIndex <= endIndex)
             {

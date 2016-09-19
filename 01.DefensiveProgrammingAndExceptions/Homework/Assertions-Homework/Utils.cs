@@ -29,5 +29,13 @@ namespace AssertionsHomework
                 return true;
             }
         }
+
+        public static bool IsMinValue<T>(IEnumerable<T> arr, T value, int startIndex, int endIndex) where T : IComparable<T>
+        {
+            return arr.Skip(startIndex)
+                .Take(endIndex - startIndex)
+                .Min()
+                .CompareTo(value) > -1;
+        }
     }
 }
