@@ -1,39 +1,66 @@
-﻿using System;
-
-public class SimpleMathExam : Exam
+﻿namespace ExceptionsHomework
 {
-    public SimpleMathExam(int problemsSolved)
+    public class SimpleMathExam : Exam
     {
-        if (problemsSolved < 0)
+        private const int MinProblemsSolved = 0;
+        private const int MaxProblemsSolved = 10;
+        private const int BadGradeProblems = 2;
+        private const int AverageGradeProblems = 5;
+        private const int GoodGradeProblems = 8;
+
+        private int problemsSolved;
+
+        public SimpleMathExam(int problemsSolved)
         {
-            problemsSolved = 0;
+            this.ProblemsSolved = problemsSolved;
         }
 
-        if (problemsSolved > 10)
+        public int ProblemsSolved
         {
-            problemsSolved = 10;
+            get
+            {
+                return this.problemsSolved;
+            }
+
+            private set
+            {
+                if (value < MinProblemsSolved)
+                {
+                    this.problemsSolved = MinProblemsSolved;
+                }
+                else if (value > MaxProblemsSolved)
+                {
+                    this.problemsSolved = MaxProblemsSolved;
+                }
+                else
+                {
+                    this.problemsSolved = value;
+                }
+            }
         }
 
-        this.ProblemsSolved = problemsSolved;
-    }
-
-    public int ProblemsSolved { get; private set; }
-
-    public override ExamResult Check()
-    {
-        if (this.ProblemsSolved == 0)
+        public override ExamResult Check()
         {
-            return new ExamResult(2, 2, 6, "Bad result: nothing done.");
-        }
-        else if (this.ProblemsSolved == 1)
-        {
-            return new ExamResult(4, 2, 6, "Average result: nothing done.");
-        }
-        else if (this.ProblemsSolved == 2)
-        {
-            return new ExamResult(6, 2, 6, "Average result: nothing done.");
-        }
+            string comment;
 
-        return new ExamResult(0, 0, 0, "Invalid number of problems solved!");
+            if (this.ProblemsSolved <= BadGradeProblems)
+            {
+                comment = "Bad result!";
+            }
+            else if (this.ProblemsSolved <= AverageGradeProblems)
+            {
+                comment = "Average result!";
+            }
+            else if (this.problemsSolved <= GoodGradeProblems)
+            {
+                comment = "Good result!";
+            }
+            else
+            {
+                comment = "Excelent result";
+            }
+
+            return new ExamResult(this.problemsSolved, MinProblemsSolved, MaxProblemsSolved, comment);
+        }
     }
 }

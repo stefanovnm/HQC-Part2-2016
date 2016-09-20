@@ -1,91 +1,94 @@
 ﻿using System;
 
-public class ExamResult
+namespace ExceptionsHomework
 {
-    private const int MinGradeValue = 0;
-
-    private int grade;
-    private int minGrade;
-    private int maxGrade;
-    private string comments;
-
-    public ExamResult(int grade, int minGrade, int maxGrade, string comments)
+    public class ExamResult
     {
-        this.Grade = grade;
-        this.MinGrade = minGrade;
-        this.MaxGrade = maxGrade;
-        this.Comments = comments;
-    }
+        private const int MinGradeValue = 0;
 
-    public int Grade
-    {
-        get
+        private int grade;
+        private int minGrade;
+        private int maxGrade;
+        private string comments;
+
+        public ExamResult(int grade, int minGrade, int maxGrade, string comments)
         {
-            return this.grade;
+            this.Grade = grade;
+            this.MinGrade = minGrade;
+            this.MaxGrade = maxGrade;
+            this.Comments = comments;
         }
 
-        private set
+        public int Grade
         {
-            if (value < this.MinGrade)
+            get
             {
-                throw new ArgumentOutOfRangeException("Grade must be greater than the min grade!");
+                return this.grade;
             }
 
-            this.grade = value;
-        }
-    }
-
-    public int MinGrade
-    {
-        get
-        {
-            return this.minGrade;
-        }
-
-        private set
-        {
-            if (value < MinGradeValue)
+            private set
             {
-                throw new ArgumentOutOfRangeException("Min value should be equal or greater than " + MinGradeValue + "!");
+                if (value < this.MinGrade)
+                {
+                    throw new ArgumentOutOfRangeException("Grade must be greater than the min grade!");
+                }
+
+                this.grade = value;
+            }
+        }
+
+        public int MinGrade
+        {
+            get
+            {
+                return this.minGrade;
             }
 
-            this.minGrade = value;
-        }
-    }
-
-    public int MaxGrade
-    {
-        get
-        {
-            return this.maxGrade;
-        }
-
-        private set
-        {
-            if (value <= this.MinGrade)
+            private set
             {
-                throw new ArgumentOutOfRangeException("Max grade must be greater than min grade!");
+                if (value < MinGradeValue)
+                {
+                    throw new ArgumentOutOfRangeException("Min value should be equal or greater than " + MinGradeValue + "!");
+                }
+
+                this.minGrade = value;
+            }
+        }
+
+        public int MaxGrade
+        {
+            get
+            {
+                return this.maxGrade;
             }
 
-            this.maxGrade = value;
-        }
-    }
-
-    public string Comments
-    {
-        get
-        {
-            return this.comments;
-        }
-
-        private set
-        {
-            if (string.IsNullOrEmpty(value))
+            private set
             {
-                throw new ArgumentException("Comment should not be empty!");
+                if (value <= this.MinGrade)
+                {
+                    throw new ArgumentOutOfRangeException("Max grade must be greater than min grade!");
+                }
+
+                this.maxGrade = value;
+            }
+        }
+
+        public string Comments
+        {
+            get
+            {
+                return this.comments;
             }
 
-            this.comments = value;
+            private set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException("Comment should not be empty!");
+                }
+
+                this.comments = value;
+            }
         }
     }
 }

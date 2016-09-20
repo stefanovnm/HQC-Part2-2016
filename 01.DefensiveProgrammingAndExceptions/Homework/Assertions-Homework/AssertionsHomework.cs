@@ -11,8 +11,11 @@ namespace AssertionsHomework
             SortingFunctions.SelectionSort(arr);
             Console.WriteLine("sorted = [{0}]", string.Join(", ", arr));
 
-            SortingFunctions.SelectionSort(new int[0]); // Test sorting empty array
-            SortingFunctions.SelectionSort(new int[1]); // Test sorting single element array
+            // Test sorting empty array
+            SortingFunctions.SelectionSort(new int[0]);
+
+            // Test sorting single element array
+            SortingFunctions.SelectionSort(new int[1]); 
 
             Console.WriteLine(SearchFunctions.BinarySearch(arr, -1000));
             Console.WriteLine(SearchFunctions.BinarySearch(arr, 0));
