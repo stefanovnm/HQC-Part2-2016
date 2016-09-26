@@ -1,28 +1,47 @@
 ﻿using System;
 
-public class CSharpExam : Exam
+namespace ExceptionsHomework
 {
-    public CSharpExam(int score)
+    public class CSharpExam : Exam
     {
-        if (score < 0)
+        private const int MinGrade = 0;
+        private const int MaxGrade = 100;
+
+        private int score;
+
+        public CSharpExam(int score)
         {
-            throw new NullReferenceException();
+            this.Score = score;
         }
 
-        this.Score = score;
-    }
-
-    public int Score { get; private set; }
-
-    public override ExamResult Check()
-    {
-        if (this.Score < 0 || this.Score > 100)
+        public int Score
         {
-            throw new InvalidOperationException();
+            get
+            {
+                return this.score;
+            }
+
+            private set
+            {
+                if (value < MinGrade || value > MaxGrade)
+                {
+                    throw new ArgumentOutOfRangeException($"The score is out of range [{MinGrade} - {MaxGrade}]");
+                }
+
+                this.score = value;
+            }
         }
-        else
+
+        public override ExamResult Check()
         {
-            return new ExamResult(this.Score, 0, 100, "Exam results calculated by score.");
+            if (this.Score < MinGrade || this.Score > MaxGrade)
+            {
+                throw new ArgumentOutOfRangeException($"The score is out of range [{MinGrade} - {MaxGrade}]");
+            }
+            else
+            {
+                return new ExamResult(this.Score, MinGrade, MaxGrade, "Exam results calculated by score.");
+            }
         }
     }
 }
